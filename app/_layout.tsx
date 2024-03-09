@@ -1,4 +1,4 @@
-import { Stack, withLayoutContext } from "expo-router";
+import { Stack, useNavigation, withLayoutContext } from "expo-router";
 import CustomHeader from "../components/CustomHeader";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import Colors from "@/constants/Colors";
@@ -11,6 +11,8 @@ export const unstable_settings = {
 };
 
 export default function RootLayoutNav() {
+	const navigation = useNavigation();
+
 	return (
 		<BottomSheetModalProvider>
 			<Stack>
@@ -28,10 +30,25 @@ export default function RootLayoutNav() {
 						// gestEnabled: true, ...TransitionPresets.ModalPresentationIOS,
 						headerTitle: 'Фильтр',
 						animation:"slide_from_bottom",
+						headerTitleAlign: 'center',
 						headerShadowVisible: false,
 						headerStyle: {
 							backgroundColor: Colors.lightGrey,
 						},		
+						headerTitleStyle:{
+							color: Colors.primary,
+							fontSize: 20,
+							fontWeight: 'bold',
+						},
+						headerLeft: () => (
+							<TouchableOpacity onPress={() => {navigation.goBack()}}>
+								<Ionicons
+									name="close-outline"
+									size={28}
+									color={Colors.primary}
+								/>
+							</TouchableOpacity>
+						)
 					}}
 				/>
 			</Stack>
