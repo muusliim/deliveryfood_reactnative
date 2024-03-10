@@ -45,7 +45,7 @@ const BottomSheet = forwardRef<Ref>((props, ref) => {
 				</View>
 
 				<Text style={styles.subheader}>Ваша локация</Text>
-				<Link href={"/"} asChild>
+				<Link href={"/(modal)/location-search"} asChild>
 					<TouchableOpacity>
 						<View style={styles.item}>
 							<Ionicons
@@ -53,7 +53,7 @@ const BottomSheet = forwardRef<Ref>((props, ref) => {
 								size={20}
 								color={Colors.medium}
 							/>
-							<Text style={{flex: 1}}> Текущее местоположение</Text>
+							<Text style={{ flex: 1 }}> Текущее местоположение</Text>
 							<Ionicons
 								name="chevron-forward-outline"
 								size={20}
@@ -64,22 +64,17 @@ const BottomSheet = forwardRef<Ref>((props, ref) => {
 				</Link>
 
 				<Text style={styles.subheader}>Время доставки</Text>
-                <TouchableOpacity>
-						<View style={styles.item}>
-							<Ionicons
-								name="time-outline"
-								size={20}
-								color={Colors.medium}
-							/>
-							<Text style={{flex: 1}}>Сейчас</Text>
-							<Ionicons
-								name="chevron-forward-outline"
-								size={20}
-								color={Colors.primary}
-							/>
-						</View>
-					</TouchableOpacity>
-                
+				<TouchableOpacity>
+					<View style={styles.item}>
+						<Ionicons name="time-outline" size={20} color={Colors.medium} />
+						<Text style={{ flex: 1 }}>Сейчас</Text>
+						<Ionicons
+							name="chevron-forward-outline"
+							size={20}
+							color={Colors.primary}
+						/>
+					</View>
+				</TouchableOpacity>
 
 				<TouchableOpacity style={styles.button} onPress={() => dismiss()}>
 					<Text style={styles.buttonText}>Подтвердить</Text>
@@ -138,11 +133,11 @@ const styles = StyleSheet.create({
 	item: {
 		flexDirection: "row",
 		gap: 8,
-        padding: 16,
-        alignItems: "center",
-        backgroundColor: "#fff",
-        borderColor: '#ccc',
-        borderWidth: 1
+		padding: 16,
+		alignItems: "center",
+		backgroundColor: "#fff",
+		borderColor: "#ccc",
+		borderWidth: 1,
 	},
 });
 export default BottomSheet;
