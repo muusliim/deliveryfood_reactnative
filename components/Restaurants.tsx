@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+	View,
+	Text,
+	ScrollView,
+	StyleSheet,
+	TouchableOpacity,
+	Image,
+} from "react-native";
 import { restaurants } from "@/assets/data/home";
 import Colors from "@/constants/Colors";
 import { Link } from "expo-router";
@@ -10,17 +17,20 @@ const Restaurants = () => {
 			contentContainerStyle={{ padding: 15 }}
 		>
 			{restaurants.map((restaurant, index) => (
-				<Link href={"/"} key={index} asChild>
+				<Link href={"/details"} key={index} asChild>
 					<TouchableOpacity>
 						<View style={styles.categoryCard}>
-                            <Image source={restaurant.img} style={styles.image}/>
-                            <View style={styles.categoryBox}>
-                                <Text style={styles.categoryText}>{restaurant.name}</Text>
-                                <Text style={{color: Colors.green}}>{restaurant.rating} {restaurant.ratings}</Text>
-                                <Text style={{color: Colors.medium}}>{restaurant.distance}</Text>
-                            </View>
-                            
-                        </View>
+							<Image source={restaurant.img} style={styles.image} />
+							<View style={styles.categoryBox}>
+								<Text style={styles.categoryText}>{restaurant.name}</Text>
+								<Text style={{ color: Colors.green }}>
+									{restaurant.rating} {restaurant.ratings}
+								</Text>
+								<Text style={{ color: Colors.medium }}>
+									{restaurant.distance}
+								</Text>
+							</View>
+						</View>
 					</TouchableOpacity>
 				</Link>
 			))}
@@ -43,28 +53,25 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.25,
 		shadowRadius: 2,
 		borderRadius: 4,
-        padding: 1
+		padding: 1,
 	},
 	categoryText: {
 		padding: 6,
 		fontSize: 16,
 		fontWeight: "bold",
 	},
-    image:{
-        flex: 5,
-        width: "100%",
-        height: "100%",
-        borderRadius: 4
- 
-    },
-    imageContainer: {
-
-    },
-    categoryBox:{
-        flex: 2,
-        padding: 10,
-        alignItems: 'stretch'
-    }
+	image: {
+		flex: 5,
+		width: "100%",
+		height: "100%",
+		borderRadius: 4,
+	},
+	categoryBox: {
+		flex: 2,
+		padding: 10,
+		alignItems: "stretch",
+	},
+	
 });
 
 export default Restaurants;
