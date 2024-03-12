@@ -11,8 +11,9 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import Colors from "@/constants/Colors";
 import { restaurant } from "@/assets/data/restaurant";
 import { Link, useNavigation } from "expo-router";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+import Animated from "react-native-reanimated";
 
 const Details = () => {
 	const navigation = useNavigation();
@@ -52,13 +53,15 @@ const Details = () => {
 		});
 	}, []);
 
-	const renderItems: ListRenderItem<any> = ({ item, index }) => (
+	const renderItems: ListRenderItem<any> = ({ item }) => (
 		<Link href={`/`} asChild>
 			<TouchableOpacity style={styles.item}>
-				<View style={{flex: 1}}>
-					<Text>{item.name}</Text>
-					<Text>{item.price}</Text>
+				<View style={{ flex: 1 }}>
+					<Text style={styles.dish}>{item.name}</Text>
+					<Text style={styles.dishText}>{item.info}</Text>
+					<Text style={styles.dishText}>{item.price}$</Text>
 				</View>
+				<Image source={item.img} style={styles.dishImage} />
 			</TouchableOpacity>
 		</Link>
 	);
@@ -97,7 +100,13 @@ const Details = () => {
 						scrollEnabled={false}
 						sections={DATA}
 						ItemSeparatorComponent={() => (
-							<View style={{ height: 1, backgroundColor: Colors.darkGrey }} />
+							<View
+								style={{
+									height: 1,
+									backgroundColor: Colors.darkGrey,
+									marginHorizontal: 20,
+								}}
+							/>
 						)}
 						SectionSeparatorComponent={() => (
 							<View style={{ height: 1, backgroundColor: Colors.darkGrey }} />
@@ -109,6 +118,22 @@ const Details = () => {
 					/>
 				</View>
 			</ParallaxScrollView>
+
+			<Animated.View style={[styles.stickySegments]}>
+				<View style={styles.segmentsShadow}>
+					<ScrollView
+						horizontal
+						showsHorizontalScrollIndicator={false}
+						contentContainerStyle={{ padding: 15 }}
+					>
+						{restaurant.food.map((item, index) => (
+							<TouchableOpacity key={index}>
+								<Text>{item.category}</Text>
+							</TouchableOpacity>
+						))}
+					</ScrollView>
+				</View>
+			</Animated.View>
 		</>
 	);
 };
@@ -161,9 +186,33 @@ const styles = StyleSheet.create({
 	},
 	item: {
 		backgroundColor: "#fff",
-		padding: 20,
+		padding: 16,
 		flexDirection: "row",
 	},
+	dishImage: {
+		height: 80,
+		width: 80,
+		borderRadius: 8,
+	},
+	dish: {
+		fontSize: 18,
+		fontWeight: "bold",
+	},
+	dishText: {
+		fontSize: 16,
+		color: Colors.mediumDark,
+		paddingRight: 6,
+		paddingVertical: 4,
+	},
+	stickySegments: {
+		position: "absolute",
+		height: 50,
+		left: 0,
+		right: 0,
+		top: 80,
+		backgroundColor: "#fff",
+	},
+	segmentsShadow: {},
 });
 
 export default Details;
