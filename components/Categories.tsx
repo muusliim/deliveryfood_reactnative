@@ -21,7 +21,7 @@ const Categories = () => {
 const styles = StyleSheet.create({
 	categoryCard: {
 		width: 100,
-		height: 100,
+		height: 125,
 		backgroundColor: "#fff",
 		marginEnd: 12,
 		elevation: 2,
@@ -44,3 +44,5 @@ const styles = StyleSheet.create({
 });
 
 export default Categories;
+
+

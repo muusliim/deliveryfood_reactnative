@@ -5,8 +5,6 @@ import Colors from "@/constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 
-
-
 export const unstable_settings = {
 	// Ensure that reloading on `/modal` keeps a back button present.
 	initialRouteName: "index",
@@ -14,7 +12,6 @@ export const unstable_settings = {
 
 export default function RootLayoutNav() {
 	const navigation = useNavigation();
-	
 
 	return (
 		<BottomSheetModalProvider>
@@ -75,6 +72,34 @@ export default function RootLayoutNav() {
 						},
 						headerLeft: () => (
 							<TouchableOpacity
+								onPress={() => {
+									navigation.goBack();
+								}}
+							>
+								<Ionicons
+									name="close-outline"
+									size={28}
+									color={Colors.primary}
+								/>
+							</TouchableOpacity>
+						),
+					}}
+				/>
+
+				<Stack.Screen
+					name="(modal)/dish"
+					options={{
+						presentation: "modal",
+						headerTitle: "",
+						animation: "slide_from_bottom",
+						headerTransparent: true,
+						headerLeft: () => (
+							<TouchableOpacity
+								style={{
+									backgroundColor: "#fff",
+									borderRadius: 25,
+									padding: 8,
+								}}
 								onPress={() => {
 									navigation.goBack();
 								}}

@@ -193,11 +193,12 @@ const styles = StyleSheet.create({
 	},
 	footer: {
 		position: "absolute",
-		bottom: 20,
+		bottom: 5,
 		left: 0,
 		right: 0,
 		backgroundColor: "#fff",
 		padding: 10,
+		paddingRight:10,
 		borderTopLeftRadius: 10,
 		borderTopRightRadius: 10,
 		elevation: 10,
@@ -268,7 +269,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		borderRadius: 8,
-		height: 56,
+		height: 55,
 	},
 });
 
