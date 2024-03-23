@@ -1,14 +1,21 @@
 import { getDishById } from "@/assets/data/restaurant";
 import Colors from "@/constants/Colors";
-import { useLocalSearchParams } from "expo-router";
+import useBasketStore from "@/store/basketStore";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Animated, { FadeIn, FadeInLeft } from "react-native-reanimated";
 
 const Dish = () => {
+  const navigation = useNavigation();
 	const { id } = useLocalSearchParams();
-	const item = getDishById(+id);
-	const addToCart = () => {};
+	const item = getDishById(+id)!;
+  const { addProduct } = useBasketStore();
+
+  const addToCart = () => {
+    addProduct(item);
+    navigation.goBack();
+  };
 	return (
 		<View style={styles.container}>
 			<Animated.Image
@@ -36,7 +43,7 @@ const Dish = () => {
 					<TouchableOpacity style={styles.fullButton}>
 						<Text
 							style={styles.textButton}
-							onPress={addToCart}
+              onPress={addToCart}
 						>{`Добавить в корзину за ${item?.price}$`}</Text>
 					</TouchableOpacity>
 				</View>

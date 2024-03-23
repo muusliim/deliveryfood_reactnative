@@ -18,6 +18,8 @@ import Animated, {
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated";
+import useBasketStore from "@/store/basketStore";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Details = () => {
 	const navigation = useNavigation();
@@ -35,6 +37,9 @@ const Details = () => {
 		data: item.meals,
 		index,
 	}));
+
+	const { items, total } = useBasketStore();
+
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			headerTransparent: true,
@@ -177,6 +182,21 @@ const Details = () => {
 					</ScrollView>
 				</View>
 			</Animated.View>
+
+			{/*footer basket*/}
+			{items > 0 && (
+				<View style={styles.footer}>
+					<SafeAreaView edges={["bottom"]} style={{ backgroundColor: "#fff" }}>
+						<Link href="/basket" asChild>
+							<TouchableOpacity style={styles.fullButton}>
+								<Text style={styles.basket}>{items}</Text>
+								<Text style={styles.footerText}>Посмотреть корзину</Text>
+								<Text style={styles.basketTotal}> ${total}</Text>
+							</TouchableOpacity>
+						</Link>
+					</SafeAreaView>
+				</View>
+			)}
 		</>
 	);
 };
@@ -291,6 +311,47 @@ const styles = StyleSheet.create({
 	segmentScrollView: {
 		paddingRight: 10,
 		gap: 20,
+	},
+	footer: {
+		position: "absolute",
+		backgroundColor: "#fff",
+		bottom: 0,
+		left: 0,
+		width: "100%",
+		padding: 10,
+		elevation: 10,
+		shadowColor: "#000",
+		shadowOffset: { width: 0, height: -10 },
+		shadowOpacity: 0.1,
+		shadowRadius: 10,
+		paddingTop: 20,
+	},
+	fullButton: {
+		backgroundColor: Colors.primary,
+		paddingHorizontal: 16,
+		borderRadius: 8,
+		alignItems: "center",
+		flexDirection: "row",
+		flex: 1,
+		justifyContent: "space-between",
+		height: 50,
+	},
+	footerText: {
+		color: "#fff",
+		fontWeight: "bold",
+		fontSize: 16,
+	},
+	basket: {
+		color: "#fff",
+		backgroundColor: "#19AA86",
+		fontWeight: "bold",
+		padding: 8,
+		borderRadius: 2,
+	},
+	basketTotal: {
+		color: "#fff",
+		fontWeight: "bold",
+		fontSize: 16,
 	},
 });
 

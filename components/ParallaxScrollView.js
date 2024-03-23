@@ -486,4 +486,3 @@ const styles = StyleSheet.create({
 
 export default ParallaxScrollView;
 
-

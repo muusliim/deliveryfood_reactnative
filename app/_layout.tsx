@@ -113,6 +113,28 @@ export default function RootLayoutNav() {
 						),
 					}}
 				/>
+				<Stack.Screen
+					name="(modal)/basket"
+					options={{
+						presentation: "modal",
+						headerTitle: "Корзина",
+						headerTitleAlign:'center',
+						headerLeft: () => (
+							<TouchableOpacity
+								style={{
+									backgroundColor: "#fff",
+									borderRadius: 25,
+									padding: 8,
+								}}
+								onPress={() => {
+									navigation.goBack();
+								}}
+							>
+								<Ionicons name="arrow-back" size={28} color={Colors.primary} />
+							</TouchableOpacity>
+						),
+					}}
+				/>
 			</Stack>
 		</BottomSheetModalProvider>
 	);
